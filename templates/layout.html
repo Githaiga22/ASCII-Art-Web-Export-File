@@ -1,0 +1,28 @@
+{{define "layout"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{template "title"}}</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-image: url('https://r4.wallpaperflare.com/wallpaper/384/818/513/himalayas-mountains-landscape-nature-wallpaper-6826fde8a0307cb8800cf11ed822d47a.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  </style>
+</head>
+<body class="bg-gray-900 bg-opacity-75 text-white min-h-screen flex flex-col">
+  <main class="flex-grow">
+    {{template "body" .}}
+  </main>
+  <footer class="bg-blue-500 bg-opacity-80 text-white py-4 mt-6 shadow-md backdrop-blur-md">
+    <div class="container mx-auto text-center">
+      <p>&copy; 2024 Mmoffat and Alkamau</p>
+    </div>
+  </footer>
+</body>
+</html>
+{{end}}

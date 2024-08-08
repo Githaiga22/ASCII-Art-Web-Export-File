@@ -1,0 +1,87 @@
+{{define "title"}}ASCII Art Generator{{end}} 
+{{define "body"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+  <title>ASCII Art Generator</title>
+  <style>
+    body {
+      background-image: url('https://r4.wallpaperflare.com/wallpaper/384/818/513/himalayas-mountains-landscape-nature-wallpaper-6826fde8a0307cb8800cf11ed822d47a.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  </style>
+</head>
+<body class="bg-gray-900 bg-opacity-75 text-white min-h-screen flex items-center justify-center">
+  <div class="container mx-auto p-4 bg-white bg-opacity-70 rounded-lg shadow-md backdrop-blur-md">
+    <h1 class="text-3xl font-bold text-center text-gray-900 mb-6">ASCII Art Generator</h1>
+    <form action="/ascii-art" method="POST" class="bg-white bg-opacity-70 p-6 rounded-lg shadow-md backdrop-blur-md">
+      <div class="mb-4">
+        <p class="mb-2 font-semibold text-gray-900">Choose an art style:</p>
+        <div class="flex items-center mb-2">
+          <input type="radio" id="Standard" name="artstyle" value="standard" checked class="mr-2">
+          <label for="Standard" class="text-gray-900">Standard</label>
+        </div>
+        <div class="flex items-center mb-2">
+          <input type="radio" id="Shadow" name="artstyle" value="shadow" class="mr-2">
+          <label for="Shadow" class="text-gray-900">Shadow</label>
+        </div>
+        <div class="flex items-center">
+          <input type="radio" id="ThinkerToy" name="artstyle" value="thinkertoy" class="mr-2">
+          <label for="ThinkerToy" class="text-gray-900">ThinkerToy</label>
+        </div>
+      </div>
+      <div class="mb-4">
+        <label for="UserText" class="block text-gray-900 font-semibold mb-2">Enter your text:</label>
+        <textarea id="UserText" name="text" placeholder="Type your text here..." class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 placeholder-gray-500" required></textarea>
+      </div>
+      <div class="text-center">
+        <input type="submit" value="Generate" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700 cursor-pointer">
+      </div>
+    </form>
+
+    <!-- Export Form: Display only if ASCIIArtResult exists -->
+    {{if .ASCIIArtResult}}
+    <div class="mt-6 bg-white bg-opacity-70 p-6 rounded-lg shadow-md backdrop-blur-md">
+      <h2 class="text-2xl font-semibold mb-4 text-gray-900">Generated ASCII Art:</h2>
+      <div class="overflow-x-auto">
+        <pre class="whitespace-pre text-gray-900">{{.ASCIIArtResult}}</pre>
+      </div>
+      <form action="/export" method="get" class="mt-4">
+        <input type="hidden" name="ascii" value="{{.ASCIIArtResult}}">
+        <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-700 cursor-pointer">Export Ascii Art</button>
+      </form>
+    </div>
+    {{end}}
+
+  </div>
+  <script>
+    function handleInput() {
+      const textarea = document.getElementById('UserText');
+      const button = document.getElementById('generateButton');
+      const warning = document.getElementById('inputWarning');
+      
+      if (textarea.value.trim() === '') {
+        button.disabled = true;
+        warning.classList.remove('hidden');
+      } else {
+        button.disabled = false;
+        warning.classList.add('hidden');
+      }
+    }
+    document.getElementById('UserText').addEventListener('focus', function() {
+      this.setAttribute('placeholder', '');
+    });
+    document.getElementById('UserText').addEventListener('blur', function() {
+      if (this.value === '') {
+        this.setAttribute('placeholder', 'Type your text here...');
+      }
+    });
+  </script>
+</body>
+</html>
+{{end}}
