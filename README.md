@@ -37,7 +37,7 @@ The ASCII Art Web Export File project is an extension of the ASCII Art Web appli
 
 1. Clone the repository:
    ```bash
-   git clone https://learn.zone01kisumu.ke/git/allkamau/ascii-art-web-export-file.git
+   git clone https://github.com/Githaiga22/ASCII-Art-Web-Export-File.git
 2. Navigate to the project directory:
 ```bash
 cd ascii-art-web-export-file
